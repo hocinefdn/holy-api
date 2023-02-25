@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,9 +18,32 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        DB::table('categories')->insert([[
+            'name' => 'Mode',
+        ], [
+            'name' => 'Electroménager,TV & Audio',
+        ], [
+            'name' => 'Beauté',
+        ], [
+            'name' => 'Maison & Cuisine',
+        ], [
+            'name' => 'Téléphonie & Accessoires',
+        ], [
+            'name' => 'Informatique',
+        ], [
+            'name' => 'Bébé',
+        ],  [
+            'name' => 'Santé',
+        ], [
+            'name' => 'Jeux',
+        ], [
+            'name' => 'Sport',
+        ], [
+            'name' => 'Auto & Moto',
+        ], [
+            'name' => 'Bricolage & Jardinage',
+        ], [
+            'name' => 'Sport',
+        ]]);
     }
 }
