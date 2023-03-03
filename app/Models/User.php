@@ -48,6 +48,7 @@ class User extends Authenticatable
 
 
 
+
     /**
      * Get all of the shops for the User
      *
@@ -58,3 +59,4 @@ class User extends Authenticatable
         return $this->hasMany(Shop::class, 'user_id');
     }
 }
+

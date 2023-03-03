@@ -6,13 +6,14 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+
 
 class UserController extends Controller
 {
 
     // register
     public function register(Request $request)
+
     {
         // hashing
         $password = Hash::make($request->password);
@@ -31,13 +32,16 @@ class UserController extends Controller
             "role" => 0
         ]);
 
+
         $token = $user->createToken("web-token")->plainTextToken;
+
 
         return response([
             "user" => $user,
             "token" => $token
         ]);
     }
+
 
     // login function
     public function login(Request $request)
@@ -59,6 +63,7 @@ class UserController extends Controller
                 'message' => "L'e-mail ou le mot de passe ne correspondent pas.",
             ], 401);
         };
+
     }
 
 
