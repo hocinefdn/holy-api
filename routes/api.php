@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+
+use App\Http\Controllers\ShopController;
+
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,7 +25,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 //user
-Route::post('/user', [UserController::class, 'addUser']);
+
+Route::post('/user/register', [UserController::class, 'register']);
+Route::post('/user/login', [UserController::class, 'login']);
+
 Route::get('/user', [UserController::class, 'getUser']);
 
 
@@ -31,3 +37,8 @@ Route::post('/articles', [ArticleController::class, 'addArticle']);
 
 //caterogies
 Route::get('/categories/getAll', [CategoryController::class, 'getAllCategories']);
+
+// shops
+Route::get('/shops/{user}', [ShopController::class, 'getShops']);
+Route::post('/shops/', [ShopController::class, 'createShops']);
+
