@@ -1,9 +1,8 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
-
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ShopController;
-
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,12 +27,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/user/register', [UserController::class, 'register']);
 Route::post('/user/login', [UserController::class, 'login']);
-
 Route::get('/user', [UserController::class, 'getUser']);
 
 
 //articles
 Route::post('/articles', [ArticleController::class, 'addArticle']);
+Route::get('/articles/{article}', [ArticleController::class, 'getArticle']);
+Route::get('/articles', [ArticleController::class, 'getAllArticles']);
 
 //caterogies
 Route::get('/categories/getAll', [CategoryController::class, 'getAllCategories']);
@@ -41,4 +41,3 @@ Route::get('/categories/getAll', [CategoryController::class, 'getAllCategories']
 // shops
 Route::get('/shops/{user}', [ShopController::class, 'getShops']);
 Route::post('/shops/', [ShopController::class, 'createShops']);
-

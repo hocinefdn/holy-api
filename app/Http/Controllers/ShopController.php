@@ -12,7 +12,6 @@ class ShopController extends Controller
     public function getShops($userId)
     {
         $shops = Shop::where('user_id', $userId)->get();
-
         return response()->json(['shops' => $shops]);
     }
 
@@ -27,6 +26,7 @@ class ShopController extends Controller
             "style" => json_encode($request->style),
             "rate" => 0,
             "details" => json_encode($request->details),
+            "slug" => str_replace(' ', '-', strtolower($request->name)),
             "user_id" => $request->userId
         ]);
 

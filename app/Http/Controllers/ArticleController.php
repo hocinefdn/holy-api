@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -9,51 +10,39 @@ use Illuminate\Support\Facades\Hash;
 
 class ArticleController extends Controller
 {
-    public function addUser(Request $request)
+    public function addArticle(Request $request)
     {
-        // hashing
-        $password = Hash::make($request->password);
 
-        // if (Hash::check('secret', $hashedPassword))
-        // {
-        // The passwords match...
-        // }
-
-
-
-        $user = User::create([
-            "firstname" => $request->firstname,
-            "lastname" => $request->lastname,
-            "email" => $request->email,
-            "phone" => $request->phone,
-            "password" => $password,
-            "role" => 0
+        $article = Article::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'price' => $request->price,
+            'rate' => 0,
+            'stock' => $request->stock,
+            'details' => json_encode($request->details),
+            'category_id' => $request->categoryId,
+            'shop_id' => $request->shopId
         ]);
 
-        $token = $user->createToken('web-token')->plainTextToken;
-
         return response([
-            "user" => $user,
-            "token" => $token
+            "message" => "Article ajouté avec succès",
         ]);
     }
 
 
-    public function login()
+    public function getArticle(Article $article)
     {
+
+        return response([
+            "article" => $article,
+        ]);
     }
 
 
-
-    public function getUser()
+    public function getAllArticles()
     {
+        $articles = Article::all();
 
-
-        // $token = $user->createToken('main'->plainTextToken);
-
-        return response([
-            "user" => "test",
-            // "token" => $token
-        ]);
+        return response(["articles" => $articles]);
     }
 }

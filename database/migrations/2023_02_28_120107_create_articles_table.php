@@ -17,12 +17,12 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description')->nullable();
-            $table->integer('price');
+            $table->integer('price')->nullable();;
             $table->double('rate', 8, 2);
-            $table->string('stock')->nullable();
-            $table->json('details');
+            $table->integer('stock')->nullable();
+            $table->json('details')->nullable();;
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('shop_id')->constrained('shops')->cascadeOnDelete();
             $table->timestamps();
         });
     }

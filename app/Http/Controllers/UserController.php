@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 
 class UserController extends Controller
@@ -63,7 +64,6 @@ class UserController extends Controller
                 'message' => "L'e-mail ou le mot de passe ne correspondent pas.",
             ], 401);
         };
-
     }
 
 
