@@ -33,6 +33,7 @@ Route::get('/user', [UserController::class, 'getUser']);
 //articles
 Route::post('/articles', [ArticleController::class, 'addArticle']);
 Route::get('/articles/{article}', [ArticleController::class, 'getArticle']);
+Route::delete('/articles/{article}', [ArticleController::class, 'deleteArticle']);
 Route::get('/articles/get-shop-articles/{shop}', [ArticleController::class, 'getShopArticles']);
 
 //caterogies

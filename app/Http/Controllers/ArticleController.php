@@ -30,7 +30,7 @@ class ArticleController extends Controller
         ]);
     }
 
-
+    // get specific article
     public function getArticle(Article $article)
     {
 
@@ -39,11 +39,20 @@ class ArticleController extends Controller
         ]);
     }
 
-
+    // get shop articles
     public function getShopArticles(Shop $shop)
     {
         $articles = Article::where('shop_id', $shop->id)->get();
 
         return response(["articles" => $articles]);
+    }
+
+
+    // delete an article
+    public function deleteArticle(Article $article)
+    {
+        $article->delete();
+
+        return response(["message" => "L'article est supprimé avec succès"]);
     }
 }
