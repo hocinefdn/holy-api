@@ -19,7 +19,6 @@ class ShopController extends Controller
     // create shop
     public function createShops(Request $request)
     {
-
         $shop = Shop::create([
             "name" => $request->name,
             "description" => $request->description,

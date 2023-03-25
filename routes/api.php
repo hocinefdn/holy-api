@@ -33,7 +33,7 @@ Route::get('/user', [UserController::class, 'getUser']);
 //articles
 Route::post('/articles', [ArticleController::class, 'addArticle']);
 Route::get('/articles/{article}', [ArticleController::class, 'getArticle']);
-Route::get('/articles', [ArticleController::class, 'getAllArticles']);
+Route::get('/articles/get-shop-articles/{shop}', [ArticleController::class, 'getShopArticles']);
 
 //caterogies
 Route::get('/categories/getAll', [CategoryController::class, 'getAllCategories']);

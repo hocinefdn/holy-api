@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Shop;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -39,9 +40,9 @@ class ArticleController extends Controller
     }
 
 
-    public function getAllArticles()
+    public function getShopArticles(Shop $shop)
     {
-        $articles = Article::all();
+        $articles = Article::where('shop_id', $shop->id)->get();
 
         return response(["articles" => $articles]);
     }
