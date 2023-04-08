@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('shops', function (Blueprint $table) {
             $table->id();
-            $table->string("name")->unique();
             $table->text("description")->nullable();
             $table->json("style");
             $table->double('rate', 8, 2)->nullable();

@@ -47,6 +47,15 @@ class ArticleController extends Controller
         return response(["articles" => $articles]);
     }
 
+    // get shop articles
+    public function getShopArticlesFromSlug($shopSlug)
+    {
+        $shop = Shop::where('slug', $shopSlug)->first();
+        $articles = Article::where('shop_id', $shop->id)->get();
+
+        return response(["articles" => $articles]);
+    }
+
 
     // delete an article
     public function deleteArticle(Article $article)

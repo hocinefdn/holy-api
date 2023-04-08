@@ -34,7 +34,10 @@ Route::get('/user', [UserController::class, 'getUser']);
 Route::post('/articles', [ArticleController::class, 'addArticle']);
 Route::get('/articles/{article}', [ArticleController::class, 'getArticle']);
 Route::delete('/articles/{article}', [ArticleController::class, 'deleteArticle']);
+
+// To get shop's articles
 Route::get('/articles/get-shop-articles/{shop}', [ArticleController::class, 'getShopArticles']);
+Route::get('/articles/get-shop-articles-from-slug/{shop-slug}', [ArticleController::class, 'getShopArticles']);
 
 //caterogies
 Route::get('/categories/getAll', [CategoryController::class, 'getAllCategories']);
