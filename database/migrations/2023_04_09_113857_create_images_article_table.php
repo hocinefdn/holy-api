@@ -13,15 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('shops', function (Blueprint $table) {
+        Schema::create('images_article', function (Blueprint $table) {
             $table->id();
-            $table->string("name")->unique();
-            $table->text("description")->nullable();
-            $table->json("style");
-            $table->double('rate', 8, 2)->nullable();
-            $table->json('details')->nullable();
-            $table->string("slug")->unique();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->string('title');
+            $table->string('type');
+            $table->string('link');
+            $table->boolean('is_active');
+            $table->foreignId('article_id')->constrained('articles')->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shops');
+        Schema::dropIfExists('images_article');
     }
 };

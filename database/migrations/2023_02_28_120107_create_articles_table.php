@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('name')->unique();
+            $table->string('title')->unique();
             $table->text('description')->nullable();
             $table->integer('price')->nullable();;
             $table->double('rate', 8, 2);

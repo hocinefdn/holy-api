@@ -8,22 +8,39 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
+    /**
+     * Add article
+     * @param Resquest $request
+     *
+     **/
     public function addArticle(Request $request)
     {
 
-        $article = Article::create([
-            'title' => $request->title,
-            'description' => $request->description,
-            'price' => $request->price,
-            'rate' => 0,
-            'stock' => $request->stock,
-            'details' => json_encode($request->details),
-            'category_id' => $request->categoryId,
-            'shop_id' => $request->shopId
-        ]);
+
+        $shop = Shop::where('id', $request->shopId)->first();
+
+        // $article = Article::create([
+        //     'name' => $request->title,
+        //     'title' => $request->title,
+        //     'description' => $request->description,
+        //     'price' => $request->price,
+        //     'rate' => 0,
+        //     'stock' => $request->stock,
+        //     'details' => json_encode($request->details),
+        //     'category_id' => $request->categoryId,
+        //     'shop_id' => $request->shopId
+        // ]);
+
+
+        $shopPath = 'shops/' . $shop->slug;
+        $imagePath = Storage::disk('public')->put($shopPath, $request->articleImages);
+        $imagePath = '/storage/' . $imagePath;
+
+
 
         return response([
             "message" => "Article ajouté avec succès",
@@ -47,7 +64,7 @@ class ArticleController extends Controller
         return response(["articles" => $articles]);
     }
 
-    // get shop articles
+    // get shop articles from slug
     public function getShopArticlesFromSlug($shopSlug)
     {
         $shop = Shop::where('slug', $shopSlug)->first();

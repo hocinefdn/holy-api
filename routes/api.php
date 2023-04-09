@@ -37,7 +37,7 @@ Route::delete('/articles/{article}', [ArticleController::class, 'deleteArticle']
 
 // To get shop's articles
 Route::get('/articles/get-shop-articles/{shop}', [ArticleController::class, 'getShopArticles']);
-Route::get('/articles/get-shop-articles-from-slug/{shop-slug}', [ArticleController::class, 'getShopArticles']);
+Route::get('/articles/get-shop-articles-from-slug/{shopSlug}', [ArticleController::class, 'getShopArticlesFromSlug']);
 
 //caterogies
 Route::get('/categories/getAll', [CategoryController::class, 'getAllCategories']);
