@@ -7,6 +7,7 @@ use App\Models\Shop;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
@@ -19,28 +20,32 @@ class ArticleController extends Controller
      **/
     public function addArticle(Request $request)
     {
-
-
         $shop = Shop::where('id', $request->shopId)->first();
 
-        // $article = Article::create([
-        //     'name' => $request->title,
-        //     'title' => $request->title,
-        //     'description' => $request->description,
-        //     'price' => $request->price,
-        //     'rate' => 0,
-        //     'stock' => $request->stock,
-        //     'details' => json_encode($request->details),
-        //     'category_id' => $request->categoryId,
-        //     'shop_id' => $request->shopId
-        // ]);
+        $article = Article::create([
+            'name' => str_replace(' ', '-', strtolower($request->title)),
+            'title' => $request->title,
+            'description' => $request->description,
+            'price' => $request->price,
+            'rate' => 0,
+            'stock' => $request->stock,
+            'details' => json_encode($request->details),
+            'category_id' => $request->categoryId,
+            'shop_id' => $request->shopId
+        ]);
 
-
-        $shopPath = 'shops/' . $shop->slug;
+        // strore the images in storage
+        $shopPath = 'shops/' . $shop->slug . '/' . $article->name;
         $imagePath = Storage::disk('public')->put($shopPath, $request->articleImages);
         $imagePath = '/storage/' . $imagePath;
 
-
+        DB::table('images_article')->insert([
+            'title' => "test",
+            "type" => "index",
+            "link" => $imagePath,
+            "is_active" => 1,
+            "article_id" => $article->id
+        ]);
 
         return response([
             "message" => "Article ajouté avec succès",
@@ -59,7 +64,7 @@ class ArticleController extends Controller
     // get shop articles
     public function getShopArticles(Shop $shop)
     {
-        $articles = Article::where('shop_id', $shop->id)->get();
+        $articles = Article::where('shop_id', $shop->id)->with('images')->get();
 
         return response(["articles" => $articles]);
     }
